@@ -25,7 +25,9 @@ class TagsInput < ActiveAdminAddons::InputBase
   private
 
   def render_array_tags
-    render_tags_control { build_hidden_control(prefixed_method, method_to_input_name, input_value) }
+    # See https://github.com/whitesmith/activeadmin_addons/commit/cd1afd5899dbdcb978626beb3a8c25e408137b7d#diff-00fb810415a7f648929dbdeef977393dR28_#
+    value = input_value.is_a?(Array) ? input_value.join(',') : input_value
+    render_tags_control { build_hidden_control(prefixed_method, method_to_input_name, value) }
   end
 
   def render_collection_tags
